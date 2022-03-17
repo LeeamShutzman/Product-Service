@@ -11,4 +11,7 @@ import com.example.demo.models.Product;
 public interface ProductRepository extends JpaRepository<Product, Long> {
 
 	List<Product> findByCategoryID(long categoryID);
+	List<Product> findBySupplierID(long supplierID);
+	List<Product> findBySupplierIDAndCategoryID(long supplierID, long categoryID);
+	
 }
