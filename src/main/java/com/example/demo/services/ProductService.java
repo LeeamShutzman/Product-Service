@@ -28,7 +28,7 @@ public class ProductService {
 	}
 	
 	
-	public List<Product> findByCategoryID(long categoryID){
+	public List<Product> findProductsByCategoryID(long categoryID){
 		return productRepository.findByCategoryID(categoryID);
 	}
 	
@@ -46,8 +46,22 @@ public class ProductService {
 		return productRepository.findById(productID);
 	}
 
+	
+
 	public void deleteById(long productID) {
 		productRepository.deleteById(productID);
 	}
 	
+	
+	public List<Product> findProductsBySupplierID(long supplierID){
+		return productRepository.findBySupplierID(supplierID);
+	}
+	
+	
+	public List<Product> findProductsBySupplierIDAndCategoryID(long supplierID, long categoryID){
+		return productRepository.findBySupplierIDAndCategoryID(supplierID, categoryID);
+	}
+	
+
+
 }

@@ -42,21 +42,40 @@ public class ProductController {
 	public List<Product> getAllProducts(){
 		return productService.findAll();
 	}
-
 	
-	@GetMapping()
+	
+	@GetMapping("getProductsByCategoryID")
 	public List<Product> getProductsByCategory(@RequestParam long categoryID) {
-		return productService.findByCategoryID(categoryID);
+		return productService.findProductsByCategoryID(categoryID);
 	}
 	
 	
-	@GetMapping("product{id}")
-	public Optional<Product> getProductByID(@PathVariable("id") long productID) {
+	@GetMapping("getProductByID")
+	public Optional<Product> getProductByID(@RequestParam long productID) {
 		return productService.findByProductID(productID);
 	}
+	
+	@GetMapping("getProductsBySupplierID")
+	public List<Product> getProductsBySupplier(@RequestParam long supplierID) {
+		return productService.findProductsBySupplierID(supplierID);
+	}
+	
+	
+	@GetMapping("getBySupplierIDAndCategoryID")
+	public List<Product> getProductsBySupplierIDAndCategoryID(@RequestParam long supplierID, @RequestParam long categoryID ){
+		return productService.findProductsBySupplierIDAndCategoryID(supplierID, categoryID);
+	}
+	
 	
 	public void deleteById(long productID){
 		productService.deleteById(productID);
 	}
 	
 }
+	
+	
+	
+	
+	
+	
+
