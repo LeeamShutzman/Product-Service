@@ -3,13 +3,7 @@ package com.example.demo.controllers;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.models.Product;
 import com.example.demo.repositories.ProductRepository;
@@ -18,8 +12,11 @@ import com.example.demo.services.ProductService;
 @RestController
 @RequestMapping("products") //localhost:portNum/categories
 public class ProductController {
+
 	private ProductService productService;
-	
+
+	/***************************************************************/
+	//Constructors, Getters, and Setters
 	public ProductController(ProductService productService) {
 		super();
 		this.productService = productService;
@@ -32,43 +29,50 @@ public class ProductController {
 	public void setProductService(ProductService productService) {
 		this.productService = productService;
 	}
-	
-	@PostMapping("add")
+
+	/***************************************************************/
+	//Service endpoint mapping
+
+	//Add a Product
+	@PostMapping("add") //localhost:portNum/products/add
 	public Product addProduct(@RequestBody Product product) {
 		return productService.addProduct(product);
 	}
-	
+
+	//View all Products //localhost:portNum/products/all
 	@GetMapping("all")
 	public List<Product> getAllProducts(){
 		return productService.findAll();
 	}
-	
-	
-	@GetMapping("getProductsByCategoryID")
-	public List<Product> getProductsByCategory(@RequestParam long categoryID) {
-		return productService.findProductsByCategoryID(categoryID);
-	}
-	
-	
-	@GetMapping("getProductByID")
+
+	//View Product by ID
+	@GetMapping("getProductByID") //localhost:portNum/products/getProductByID?productID=#
 	public Optional<Product> getProductByID(@RequestParam long productID) {
 		return productService.findByProductID(productID);
 	}
-	
-	@GetMapping("getProductsBySupplierID")
-	public List<Product> getProductsBySupplier(@RequestParam long supplierID) {
+
+	//View Products in the same Category
+	@GetMapping("getProductsByCategoryID") //localhost:portNum/products/getProductsByCategoryID?categoryID=#
+	public List<Product> getProductsByCategoryID(@RequestParam long categoryID) {
+		return productService.findProductsByCategoryID(categoryID);
+	}
+
+	//View Products from the same Supplier
+	@GetMapping("getProductsBySupplierID") //localhost:portNum/products/getProductsBySupplierID?supplierID=#
+	public List<Product> getProductsBySupplierID(@RequestParam long supplierID) {
 		return productService.findProductsBySupplierID(supplierID);
 	}
 	
-	
-	@GetMapping("getBySupplierIDAndCategoryID")
+	//View Products from the same Supplier that are in the same Category
+	@GetMapping("getProductsBySupplierIDAndCategoryID") //localhost:portNum/products/getProductsBySupplierIDAndCategoryID?supplierID=#&categoryID=#
 	public List<Product> getProductsBySupplierIDAndCategoryID(@RequestParam long supplierID, @RequestParam long categoryID ){
 		return productService.findProductsBySupplierIDAndCategoryID(supplierID, categoryID);
 	}
-	
-	
-	public void deleteById(long productID){
-		productService.deleteById(productID);
+
+	//Delete a Product
+	@DeleteMapping("delete")//localhost:portNum/products/delete?productID=#
+	public void deleteProduct(@RequestParam long productID){
+		productService.deleteProduct(productID);
 	}
 	
 }

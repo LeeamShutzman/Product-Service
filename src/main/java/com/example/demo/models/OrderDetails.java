@@ -10,20 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.Table;
 
-class orderDetailsPK{
-	private long orderID;
-	private long productID;
-	public orderDetailsPK() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public orderDetailsPK(long orderID, long productID) {
-		super();
-		this.orderID = orderID;
-		this.productID = productID;
-	}
-	
-}
+
 @Entity
 @IdClass(com.example.demo.models.OrderDetails.class)
 @Table(name="ORDERDETAILS")
