@@ -1,11 +1,14 @@
 package com.example.demo.services;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.models.Order;
 import com.example.demo.models.Product;
 import com.example.demo.repositories.ProductRepository;
 
@@ -67,5 +70,33 @@ public class ProductService {
 	public void deleteProduct(long productID) {
 		productRepository.deleteById(productID);
 	}
+	
+	 public Product updateProduct(long productID, Product product) {
+			try {
+				Product temp = productRepository.findById(productID).get();
+				if(Objects.nonNull(product.getProductName()) && !"".equalsIgnoreCase(product.getProductName()))
+				{
+					temp.setProductName(product.getProductName());
+				}
+				if(Objects.nonNull(product.getSupplierID()) && product.getSupplierID() !=0)
+				{
+					temp.setSupplierID(product.getSupplierID());
+				}
+				if(Objects.nonNull(product.getCategoryID()) && product.getCategoryID() !=0)
+				{
+					temp.setCategoryID(product.getCategoryID());
+				}
+				if(Objects.nonNull(product.getUnitPrice()))
+				{
+					temp.setUnitPrice(product.getUnitPrice());
+				}
+				return productRepository.save(temp);
+			}
+			catch (NoSuchElementException e){
+				System.out.println("No product with that ID was found");
+				return new Product();
+			}
+	    }
+	
 
 }
