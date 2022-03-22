@@ -12,7 +12,7 @@ import javax.persistence.Table;
 
 
 @Entity
-@IdClass(com.example.demo.models.OrderDetails.class)
+@IdClass(com.example.demo.models.OrderDetailsPK.class)
 @Table(name="ORDERDETAILS")
 public class OrderDetails implements Serializable{
 

@@ -5,9 +5,7 @@ import java.util.Optional;
 
 import org.springframework.web.bind.annotation.*;
 
-import com.example.demo.models.Order;
 import com.example.demo.models.Product;
-import com.example.demo.repositories.ProductRepository;
 import com.example.demo.services.ProductService;
 
 @RestController
@@ -77,8 +75,8 @@ public class ProductController {
 		productService.deleteProduct(productID);
 	}
 	
-	//Update an Order
-	@PutMapping("/update") //localhost:portNum/orders/update
+	//Update an Product
+	@PutMapping("/update") //localhost:portNum/products/update
 	public Product updateProduct(@RequestParam long productID, @RequestBody Product product) {
 		return productService.updateProduct(productID, product);
 	}
