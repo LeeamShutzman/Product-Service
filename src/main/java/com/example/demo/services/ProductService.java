@@ -82,7 +82,7 @@ public class ProductService {
             if (Objects.nonNull(product.getCategoryID()) && product.getCategoryID() != 0) {
                 temp.setCategoryID(product.getCategoryID());
             }
-            if (Objects.nonNull(product.getUnitPrice())) {
+        if (Objects.nonNull(product.getUnitPrice()) && product.getUnitPrice() != 0) {
                 temp.setUnitPrice(product.getUnitPrice());
             }
             return productRepository.save(temp);
