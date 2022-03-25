@@ -7,7 +7,6 @@ import javax.persistence.*;
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	@JoinColumn(name="product_id", referencedColumnName="PRODUCTID")
 	private long productID;
 	@Column(name="PRODUCTNAME")
